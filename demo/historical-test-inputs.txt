@@ -1,0 +1,16 @@
+# Historical demonstration inputs
+
+These records are retained as historical test examples from the project materials. Their dates are intentionally preserved and are not current medicine inventory.
+
+BATCH:101;EXP:2024-11-18;NAME:MedA
+BATCH:102;EXP:2023-12-10;NAME:MedB
+BATCH:103;EXP:2024-11-17;NAME:MedC
+
+LIST
+
+BATCH:201;EXP:2025-08-05;NAME:Paracetamol
+BATCH:202;EXP:2024-12-01;NAME:Ibuprofen
+BATCH:203;EXP:2025-06-01;NAME:Amoxy
+BATCH:204;EXP:2024-12-01;NAME:Thyroxine
+
+LIST
