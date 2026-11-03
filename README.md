@@ -10,6 +10,14 @@ The Arduino UNO receives medicine records through its Serial Monitor, stores the
 
 This is an **individual project** developed for the Smart System Design course.
 
+## Project Demonstration
+
+### Actual Hardware Implementation
+
+![SMSES Hardware Prototype](docs/images/smses-hardware.jpg)
+
+*The assembled four-slot medicine management prototype developed using Arduino UNO, breadboard connections, medicine compartments and LED indicators.*
+
 ## What the implemented prototype does
 
 - Accepts a medicine batch number, expiry date, and name through manual Serial Monitor input.
