@@ -144,15 +144,18 @@ smart-medicine-sorting-expiry-system/
 ├── docs/
 │   ├── SMSES_Final_Project_Report.pdf
 │   ├── system-architecture.md
+│   ├── system-workflow.md
 │   └── images/
 │       └── smses-hardware.jpg
 │
 ├── hardware/
 │   ├── components.md
+│   ├── components-details.md
 │   └── connections.md
 │
 └── demo/
-    └── historical-test-inputs.txt
+    ├── historical-test-inputs.txt
+    └── testing-and-validation.md
 ```
 
 ## How to Run the Project
