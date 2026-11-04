@@ -18,9 +18,32 @@ This is an **individual project** developed for the Smart System Design course.
 
 *The assembled four-slot medicine management prototype developed using Arduino UNO, breadboard connections, medicine compartments and LED indicators.*
 
+## Project Documentation
+
+The following documents provide additional details about the implementation.
+
+### System Documentation
+
+- [System Architecture](docs/system-architecture.md)
+- [System Workflow](docs/system-workflow.md)
+- [Final Academic Project Report](docs/SMSES_Final_Project_Report.pdf)
+
+### Hardware Documentation
+
+- [Hardware Components](hardware/components.md)
+- [Detailed Hardware Components](hardware/components-details.md)
+- [Circuit Connections and Pin Configuration](hardware/connections.md)
+
+### Testing and Demonstration
+
+- [Testing and Validation](demo/testing-and-validation.md)
+- [Historical Test Inputs](demo/historical-test-inputs.txt)
+
 ## System Architecture
 
 SMSES combines embedded programming with fundamental data structures to manage medicine records according to their expiry priority.
+
+The Arduino UNO acts as the central controller. Medicine records are entered manually through the Serial Monitor and stored in the system. The Min-Heap manages expiry-based prioritisation, while the Circular Doubly Linked List supports navigation between occupied medicine slots.
 
 **System Workflow:**
 
@@ -53,6 +76,8 @@ This repository documents the prototype that was actually implemented. It does *
 
 ## Hardware Used
 
+The implemented prototype uses the following hardware components:
+
 - Arduino UNO
 - Four green LEDs
 - Four red LEDs
@@ -61,8 +86,9 @@ This repository documents the prototype that was actually implemented. It does *
 - Two push buttons (DISPENSE and NEXT)
 - Breadboard and jumper wires
 - Four-slot medicine tray
+- Current-limiting resistors for LEDs
 
-See [hardware/components.md](hardware/components.md) and [hardware/connections.md](hardware/connections.md).
+For detailed information, refer to [Hardware Components](hardware/components.md) and [Circuit Connections](hardware/connections.md).
 
 ## Pin Configuration
 
@@ -89,17 +115,31 @@ The buttons use `INPUT_PULLUP`; each button is connected between its input pin a
 
 The Min-Heap stores medicine record indices and orders them by expiry value. The root represents the smallest expiry value.
 
+**Time Complexity:**
+
 - Read the minimum: **O(1)**
 - Insert: **O(log n)**
 - Remove the minimum: **O(log n)**
 
+The Min-Heap ensures that the medicine record with the earliest expiry value receives the highest priority.
+
 ### 2. Circular Doubly Linked List (CDLL)
 
-The CDLL maintains links between occupied slot positions. The NEXT button advances the list head to the next occupied slot, wrapping around in circular order.
+The CDLL maintains links between occupied slot positions.
+
+The NEXT button advances the list head to the next occupied slot, wrapping around in circular order. This supports circular navigation through the medicine slots.
 
 ### 3. Fixed-Size Arrays and Records
 
-A fixed-size `Item` structure array stores each medicine's batch number, name, expiry value, assigned slot, and active state. Additional arrays maintain heap positions, slot-to-record mapping, and CDLL links.
+A fixed-size `Item` structure array stores each medicine's batch number, name, expiry value, assigned slot, and active state.
+
+Additional arrays maintain:
+
+- Heap positions
+- Slot-to-record mapping
+- Circular Doubly Linked List links
+
+These structures support medicine record management and slot navigation within the Arduino UNO.
 
 ## Input Format and Commands
 
@@ -108,11 +148,19 @@ Open Arduino IDE's Serial Monitor and configure:
 - **Baud rate:** 115200
 - **Line ending:** Newline
 
-Enter medicine records in this format:
+### Medicine Record Input Format
+
+Enter medicine records using the following format:
 
 ```text
 BATCH:201;EXP:2025-01-05;NAME:Paracetamol
 ```
+
+Each record contains:
+
+- `BATCH`: Medicine batch number
+- `EXP`: Medicine expiry date
+- `NAME`: Medicine name
 
 ### Available Commands
 
@@ -126,8 +174,9 @@ The `FORCEALERT` command is a demonstration aid; it changes the simulated expiry
 
 ## Historical Demonstration Inputs
 
-The original historical sample records are retained in [demo/historical-test-inputs.txt](demo/historical-test-inputs.txt). Their dates have intentionally **not** been changed to current dates.
+The original historical sample records are retained in [demo/historical-test-inputs.txt](demo/historical-test-inputs.txt).
 
+Their dates have intentionally **not** been changed to current dates. They are preserved as historical demonstration data.
 
 ## Repository Contents
 
@@ -160,13 +209,15 @@ smart-medicine-sorting-expiry-system/
 
 ## How to Run the Project
 
+Follow these steps to run the SMSES prototype:
+
 1. Install the Arduino IDE.
-2. Connect the Arduino UNO to your computer using USB.
+2. Connect the Arduino UNO to your computer using a USB cable.
 3. Open `src/SMSES.ino` in Arduino IDE.
 4. Select **Arduino Uno** under Tools → Board.
 5. Select the correct serial port under Tools → Port.
 6. Verify and upload the sketch.
-7. Open Serial Monitor at 115200 baud and select Newline.
+7. Open Serial Monitor at **115200 baud** and select **Newline**.
 8. Enter a medicine record or use `LIST`, `BEEP`, and `FORCEALERT`.
 9. Test the NEXT and DISPENSE buttons and observe the LEDs and buzzer.
 
@@ -174,7 +225,9 @@ Check the wiring documentation before powering the circuit.
 
 ## Academic Report
 
-The submitted final academic report is included unchanged at [docs/SMSES_Final_Project_Report.pdf](docs/SMSES_Final_Project_Report.pdf). It is preserved as the final submitted report and is not rewritten as part of this repository preparation.
+The submitted final academic report is included unchanged at [docs/SMSES_Final_Project_Report.pdf](docs/SMSES_Final_Project_Report.pdf).
+
+It is preserved as the final submitted report and is not rewritten as part of this repository preparation.
 
 ## Individual Project Contribution
 
@@ -206,12 +259,18 @@ These are **future-scope ideas**, not features claimed as implemented in this ve
 
 ## Disclaimer
 
-SMSES is a student learning prototype for demonstrating data structures and embedded programming. It must not be used to decide whether a medicine is safe to consume, to replace professional expiry checks, or to control real medicine dispensing.
+SMSES is a student learning prototype for demonstrating data structures and embedded programming.
+
+It must not be used to decide whether a medicine is safe to consume, to replace professional expiry checks, or to control real medicine dispensing.
 
 ---
 
-**Project Type:** Individual Academic Project  
-**Course:** Smart System Design  
-**Platform:** Arduino UNO  
-**Programming Language:** Embedded C/C++  
+**Project Type:** Individual Academic Project
+
+**Course:** Smart System Design
+
+**Platform:** Arduino UNO
+
+**Programming Language:** Embedded C/C++
+
 **Core Data Structures:** Min-Heap and Circular Doubly Linked List
